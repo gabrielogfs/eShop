@@ -33,21 +33,21 @@ const getUserbyId = async (req, res) => {
 const createUser = async (req, res) => {
 
     try {
-        const { first_name, last_name, cpf, email, cep, adress, number, complement, password} = req.body;
+        const user = req.body;
         
-        const existingEmail = await UserDAO.findOne({ email });
-        const existingCpf = await UserDAO.findOne({ cpf });
+        // const existingEmail = await UserDAO.getUsers({ email });
+        // const existingCpf = await UserDAO.getUsers({ cpf });
 
-        if(existingEmail) {
-            return res.status(400).send('Email já cadastrado.');
-        };
+        // if(!existingEmail) {
+        //     return res.status(400).send('Email já cadastrado.');
+        // };
 
-        if(existingCpf) {
-            return res.status(400).send('CPF já cadastrado.');
-        };
+        // if(!existingCpf) {
+        //     return res.status(400).send('CPF já cadastrado.');
+        // };
         
         const newUser = await UserDAO.createUser(user);
-        res.send({ status: 'success', result: newUser });
+        res.status(200).redirect('/endereco');
     } catch (error) {
         res.send({ status: 'error', message: error.message });
     };
@@ -85,8 +85,5 @@ const deleteUser = async (req, res) => {
     };
 };
 
-const registro = (req, res) => {
-    res.render('registro');
-};
 
-module.exports = { getUser, getUserbyId, createUser, updateUser, deleteUser, registro }
+module.exports = { getUser, getUserbyId, createUser, updateUser, deleteUser }

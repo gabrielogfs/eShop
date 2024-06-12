@@ -5,9 +5,7 @@ const { checkAuthenticated } = require('../middleware/auth');
 
 router.get('/', checkAuthenticated, userController.getUser);
 router.get('/:id', checkAuthenticated, userController.getUserbyId);
-router.post('/', userController.createUser);
 router.put('/:id', checkAuthenticated, userController.updateUser);
 router.delete('/:id', checkAuthenticated, userController.deleteUser);
-
 
 module.exports = router;

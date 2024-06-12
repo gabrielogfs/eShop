@@ -6,7 +6,7 @@ const getProduct = async (req, res) => {
         let product = await productDAO.getProduct();
 
         if (product) {
-            res.status(200).send({ status: 'success', result: product });
+          res.status(200).render('produtos', { product })
         } else {
             res.status(404).send({ status: 'error', message: 'Não foram encontrados produtos.' });
         }
@@ -79,5 +79,14 @@ const deleteProduct = async (req, res) => {
         res.status(400).send({ status: 'error', message: error.message });
     };
 };
+
+// const getProductPage = async (req, res) => {
+//     try {
+//         let produtos = await productDAO.getProduct();
+//         res.render('produtos', { produtos });
+//     } catch (error) {
+//         res.status(500).send('Erro ao carregar produtos.')
+//     };
+// };
 
 module.exports = { getProduct, getProductById, createProduct, updateProduct, deleteProduct };
